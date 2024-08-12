@@ -161,6 +161,11 @@ add_library(macroni_settings INTERFACE)
 include(macroni/compiler_warnings)
 set_target_compiler_warnings(macroni_settings)
 
+# Globally set the required C++ standard. We use C++23 for monadic operations
+# for optionals.
+target_compile_features(macroni_settings INTERFACE cxx_std_23)
+set_target_properties(macroni_settings PROPERTIES CXX_EXTENSIONS ON)
+
 target_include_directories(
   macroni_settings
   INTERFACE $<BUILD_INTERFACE:${MACRONI_SOURCE_DIR}/include>

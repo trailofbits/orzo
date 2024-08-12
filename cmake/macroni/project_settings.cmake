@@ -44,11 +44,6 @@ if(ENABLE_IPO)
   endif()
 endif()
 
-# Globally set the required C++ standard. We use C++23 for monadic operations
-# for optionals.
-set(CMAKE_CXX_STANDARD 23)
-set(CMAKE_CXX_EXTENSIONS OFF)
-
 if(UNIX)
   if(APPLE)
     set(PLATFORM_NAME "macos")
