@@ -61,8 +61,8 @@ maybe_mod_and_context mk_mod_and_mctx(vast::acontext_t &actx,
                                        std::forward<args_t>(args)...) |
       as_node_with_list_ref<attr_visitor_proxy>() |
       as_node<type_caching_proxy>() |
-      as_node_with_list_ref<default_visitor>(*mctx, *bld, mg, sg,
-                                             /* strict return = */ false,
+      as_node_with_list_ref<default_visitor>(*mctx, actx, *bld, mg, sg,
+                                             /* strict return = */ true,
                                              missing_return_policy::emit_trap) |
       as_node_with_list_ref<unsup_visitor>(*mctx, *bld) |
       as_node<fallthrough_visitor>();
