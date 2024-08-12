@@ -5,7 +5,6 @@
 # LICENSE file found in the root directory of this source tree.
 #
 
-option(MACRONI_USE_VENDORED_GAP "Enable build with VAST's gap submodule" ON)
 option(MACRONI_USE_VENDORED_PASTA "Enable build with pasta submodule" ON)
 option(MACRONI_USE_VENDORED_VAST "Enable build with VAST submodule" ON)
 
@@ -30,9 +29,7 @@ if(MACRONI_USE_VENDORED_PASTA)
       CACHE
         BOOL
         "Use Pasta's vendored version of Clang. Will take a long time to build")
-  add_compile_options(-w)
   add_subdirectory(pasta)
-  add_compile_options(-w)
 endif()
 
 if(MACRONI_USE_VENDORED_VAST)
