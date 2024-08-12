@@ -201,20 +201,18 @@ add_subdirectory(external)
 # right now we turn it on project-wide to prevent issues but it would be better
 # to enable it only where it is needed.
 add_compile_definitions(GAP_ENABLE_COROUTINES)
-if(NOT MACRONI_USE_VENDORED_GAP)
-  find_package(gap CONFIG REQUIRED)
-endif()
+# TOOD(bpp): Add the option to use a vendored version of gap. This is more
+# important now that VAST does not offer a vendored version of gap. Also this
+# would prevent the user from accidentally compiling gap with GCC and then
+# trying to compile Macroni with Clang, which would cause compilation errors due
+# to incompatible GCC warnings being passed to Clang.
+find_package(gap CONFIG REQUIRED)
 
 if(NOT MACRONI_USE_VENDORED_PASTA)
   find_package(pasta CONFIG REQUIRED)
 endif()
 
 if(NOT MACRONI_USE_VENDORED_VAST)
-  # TODO(bpp): Allow using vendored VAST without using vendored gap
-  if(MACRONI_USE_VENDORED_GAP)
-    message(
-      FATAL_ERROR "Using non-vendored VAST requires using non-vendored gap")
-  endif()
   find_package(VAST CONFIG REQUIRED)
 endif()
 
