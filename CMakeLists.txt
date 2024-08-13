@@ -161,6 +161,11 @@ add_library(macroni_settings INTERFACE)
 include(macroni/compiler_warnings)
 set_target_compiler_warnings(macroni_settings)
 
+# Globally set the required C++ standard. We use C++23 for monadic operations
+# for optionals.
+target_compile_features(macroni_settings INTERFACE cxx_std_23)
+set_target_properties(macroni_settings PROPERTIES CXX_EXTENSIONS ON)
+
 target_include_directories(
   macroni_settings
   INTERFACE $<BUILD_INTERFACE:${MACRONI_SOURCE_DIR}/include>
@@ -201,20 +206,18 @@ add_subdirectory(external)
 # right now we turn it on project-wide to prevent issues but it would be better
 # to enable it only where it is needed.
 add_compile_definitions(GAP_ENABLE_COROUTINES)
-if(NOT MACRONI_USE_VENDORED_GAP)
-  find_package(gap CONFIG REQUIRED)
-endif()
+# TOOD(bpp): Add the option to use a vendored version of gap. This is more
+# important now that VAST does not offer a vendored version of gap. Also this
+# would prevent the user from accidentally compiling gap with GCC and then
+# trying to compile Macroni with Clang, which would cause compilation errors due
+# to incompatible GCC warnings being passed to Clang.
+find_package(gap CONFIG REQUIRED)
 
 if(NOT MACRONI_USE_VENDORED_PASTA)
   find_package(pasta CONFIG REQUIRED)
 endif()
 
 if(NOT MACRONI_USE_VENDORED_VAST)
-  # TODO(bpp): Allow using vendored VAST without using vendored gap
-  if(MACRONI_USE_VENDORED_GAP)
-    message(
-      FATAL_ERROR "Using non-vendored VAST requires using non-vendored gap")
-  endif()
   find_package(VAST CONFIG REQUIRED)
 endif()
 

@@ -51,8 +51,8 @@ vast::operation safety_visitor::visit(const vast::cg::clang_stmt *stmt,
       .bind(mk_region_builder(else_branch))
       .freeze();
 
-  vast::cg::default_stmt_visitor visitor(m_mctx, m_bld, m_view, scope);
-  auto op = visitor.visit(else_branch);
+  auto op = next->visit(else_branch, scope);
+
   return op;
 }
 } // namespace macroni::safety

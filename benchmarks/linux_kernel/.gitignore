@@ -1,0 +1,4 @@
+kernelize_linux_results/
+*.tsv
+*.txt
+*.log
