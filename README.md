@@ -28,7 +28,7 @@ system and are at the root of a local clone of the macroni project tree:
   ```
 
 - [`VAST`](https://github.com/trailofbits/vast)
-  
+
   ```bash
   cd external/vast
   ```
@@ -98,7 +98,7 @@ macronify -xc some_file.c
 To run Macroni's tests first install LIT and FileCheck:
 
 - LIT
-  
+
   ```bash
   python3 -m pip install lit
   ```
