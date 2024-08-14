@@ -31,7 +31,6 @@ system and are at the root of a local clone of the macroni project tree:
   
   ```bash
   cd external/vast
-  git submodule update --init --recursive
   ```
 
 - [`gap`](https://github.com/lifting-bits/gap.git): See the `gap` repository's
