@@ -75,6 +75,10 @@ cmake -S . -B build/ -G "Ninja Multi-Config" \
   -D MLIR_DIR:PATH="`realpath -s external/llvm-pasta-beeda8d/lib/cmake/mlir`"
 ```
 
+If you installed `gap` but see a message saying that it is not found, then add
+the argument `-D gap_DIR:PATH=gap_dir` to the above command to tell CMake
+where to find `gap`, where `gap_dir` is the directory you installed `gap` to.
+
 Build macroni:
 
 ```bash
