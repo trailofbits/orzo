@@ -9,9 +9,7 @@
 #include "vast/CodeGen/CodeGenMetaGenerator.hpp"
 #include "vast/CodeGen/CodeGenVisitorBase.hpp"
 #include "vast/CodeGen/Common.hpp"
-#include "vast/CodeGen/DefaultDeclVisitor.hpp"
 #include "vast/CodeGen/ScopeContext.hpp"
-#include "vast/CodeGen/SymbolGenerator.hpp"
 #include "vast/Util/Common.hpp"
 #include <clang/AST/Attrs.inc>
 #include <clang/AST/Decl.h>
@@ -122,8 +120,7 @@ vast::operation kernel_visitor::visit(const vast::cg::clang_decl *decl,
 
   // Get the op for this function decl.
 
-  vast::cg::default_decl_visitor visitor(m_mctx, m_bld, m_view, scope);
-  auto op = visitor.visit(decl);
+  auto op = next->visit(decl, scope);
 
   // Attach the present attributes to the operation. Because one function may be
   // annotaed with several RCU attributes (though I'm not sure if any actually

@@ -7,7 +7,10 @@ Macroni is an MLIR dialect that adds macro expansions to VAST's tower of IRS.
 The following instructions assume you are using an Ubuntu 22.04.4 LTS operating
 system and are at the root of a local clone of the macroni project tree:
 
-- LLVM, MLIR, and a PASTA-specific version of Clang:
+- LLVM, MLIR, and a PASTA-specific version of Clang. If you are only interested
+  in using Macroni's `Safety` and `Kernel` dialects, then you may use Clang 18
+  instead. Otherwise you can install PASTA's patched version of Clang as
+  follows:
 
   ```bash
   wget -O external/llvm-pasta-beeda8d.tar.xz https://github.com/trail-of-forks/llvm-project/releases/download/beeda8d/llvm-pasta-beeda8d.tar.xz
@@ -15,7 +18,9 @@ system and are at the root of a local clone of the macroni project tree:
   tar -xvf external/llvm-pasta-beeda8d.tar.xz --directory external/llvm-pasta-beeda8d/
   ```
 
-- [`PASTA`](https://github.com/trailofbits/pasta/)
+- [`PASTA`](https://github.com/trailofbits/pasta/). If you are only interested
+  in using Macroni's `Safety` and `Kernel` dialects, then you do not need PASTA.
+  Otherwise follow these steps to download it as a submodule:
 
   ```bash
   cd external/pasta
@@ -23,11 +28,13 @@ system and are at the root of a local clone of the macroni project tree:
   ```
 
 - [`VAST`](https://github.com/trailofbits/vast)
-  
+
   ```bash
   cd external/vast
-  git submodule update --init --recursive
   ```
+
+- [`gap`](https://github.com/lifting-bits/gap.git): See the `gap` repository's
+  instructions for how to install it.
 
 - Ccache (not required but strongly recommended)
 
@@ -67,6 +74,10 @@ cmake -S . -B build/ -G "Ninja Multi-Config" \
   -D MLIR_DIR:PATH="`realpath -s external/llvm-pasta-beeda8d/lib/cmake/mlir`"
 ```
 
+If you installed `gap` but see a message saying that it is not found, then add
+the argument `-D gap_DIR:PATH=gap_dir` to the above command to tell CMake
+where to find `gap`, where `gap_dir` is the directory you installed `gap` to.
+
 Build macroni:
 
 ```bash
@@ -87,7 +98,7 @@ macronify -xc some_file.c
 To run Macroni's tests first install LIT and FileCheck:
 
 - LIT
-  
+
   ```bash
   python3 -m pip install lit
   ```
