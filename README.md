@@ -34,6 +34,9 @@ system and are at the root of a local clone of the macroni project tree:
   git submodule update --init --recursive
   ```
 
+- [`gap`](https://github.com/lifting-bits/gap.git): See the `gap` repository's
+  instructions for how to install it.
+
 - Ccache (not required but strongly recommended)
 
   ```bash
